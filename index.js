@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import morgan from 'morgan'
 import connectDB from './database/db.connect.js'
 import {login, register} from './controllers/auth.controller.js'
 import users from './routes/users.route.js'
@@ -10,7 +11,7 @@ const PATH = '/api/v1/'
 const app = express()
 app.disable('x-powered-by')
 
-app.use(cors(), express.json(), express.urlencoded({extended: false}))
+app.use(cors(), morgan('dev'), express.json(), express.urlencoded({extended: false}))
 app.use(connectDB)
 app.post(PATH + 'register', register)
 app.post(PATH + 'login', login)
