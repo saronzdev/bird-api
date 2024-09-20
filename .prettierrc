@@ -1,0 +1,13 @@
+{
+	"bracketSpacing": false,
+	"semi": false,
+	"singleQuote": true,
+	"jsxSingleQuote": true,
+	"quoteProps": "preserve",
+	"singleAttributePerLine": true,
+	"htmlWhitespaceSensitivity": "css",
+	"printWidth": 150,
+	"tabWidth": 4,
+	"useTabs": true,
+	"embeddedLanguageFormatting": "auto"
+}
