@@ -18,6 +18,10 @@ app.post(PATH + 'login', login)
 app.use(PATH + 'users', users)
 app.use(PATH + 'posts', posts)
 
+app.get('/isAlive', (req, res) => {
+	res.send('Server Running Correctly')
+})
+
 app.listen(PORT, (err) => {
 	if (err) {
 		return console.log(err.toString())
