@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
 				},
 			},
 		],
-		required: false,
+		required: true,
 	},
 	createdAt: {
 		type: Object,

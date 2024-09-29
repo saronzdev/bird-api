@@ -1,18 +1,37 @@
+import jwt from 'jsonwebtoken'
+import {createToken} from '../modules/jwt.module.js'
+import User from '../models/users.model.js'
+
+const secretKey = process.env.SECRETKEY
+
 export const verifytoken = async (req, res, next) => {
 	const {method} = req
-	if (method === 'GET' || method === 'DELETE') {
+	const {id} = req.query
+	if (method === 'GET' || method === 'DELETE' || method === 'POST') {
 		const token = req.headers.authorization.split(' ')[1]
 		if (!token) {
 			return res.status(401).json({message: 'No Loged'})
 		}
 		try {
-			const {username} = await jwt.verify(token, secretKey)
-			if (username) {
-				req.username = username
-				next()
+			const decode = await jwt.verify(token, secretKey)
+			if (decode) {
+				req.username = decode.username
+				return next()
 			} else return res.sendStatus(401)
-		} catch {
-			return res.sendStatus(401)
+		} catch (e) {
+			if (e.name === 'TokenExpiredError') {
+				try {
+					const user = await User.findById(id).select('username')
+					if (user.username) {
+						const newToken = createToken(user.username)
+						req.token = `Bearer ${newToken}`
+						req.username = user.username
+						next()
+					}
+				} catch {
+					return res.status(401).json({message: 'Invalid ID'})
+				}
+			}
 		}
 	} else return res.sendStatus(405)
 }

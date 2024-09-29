@@ -18,25 +18,28 @@ export const getPost = async (req, res) => {
 export const createPost = async (req, res) => {
 	const {username} = req.params
 	const {post} = req.body
-	try {
-		const userData = await User.findOne({username})
-		if (userData) {
-			let id
-			userData.posts.length === 0 ? (id = 0) : (id = userData.posts[userData.posts.length - 1].id + 1)
-			console.log(id)
-			const newPost = userData.posts.concat({
-				id,
-				body: post,
-				createdAt: getDate(),
-			})
-			const data = await User.findOneAndUpdate({username}, {posts: newPost}, {new: true, select: {name: 1, username: 1, posts: 1}})
-			data && res.json(data)
-		} else {
-			res.sendStatus(404)
+	if (post) {
+		try {
+			const userData = await User.findOne({username})
+			if (userData) {
+				let id
+				userData.posts.length === 0 ? (id = 0) : (id = userData.posts[userData.posts.length - 1].id + 1)
+
+				const newPost = userData.posts.concat({
+					id,
+					body: post,
+					createdAt: getDate(),
+				})
+				const data = await User.findOneAndUpdate({username}, {posts: newPost}, {new: true, select: {name: 1, username: 1, posts: 1}})
+				console.log(req.token)
+				data && res.json(data)
+			} else {
+				res.sendStatus(404)
+			}
+		} catch (e) {
+			res.end(e.toString())
 		}
-	} catch (e) {
-		res.end(e.toString())
-	}
+	} else return res.status(405).json({message: 'Post Is Missing'})
 }
 
 export const deletePost = async (req, res) => {

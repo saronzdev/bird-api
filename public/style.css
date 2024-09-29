@@ -1,0 +1,12 @@
+body {
+    color-scheme: dark-ligth;
+    box-sizing: border-box;
+}
+div {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    color: yellow;
+    box-sizing: border-box;
+}
