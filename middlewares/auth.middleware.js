@@ -8,12 +8,13 @@ export const verifytoken = async (req, res, next) => {
 	const {method} = req
 	const {id} = req.query
 	if (method === 'GET' || method === 'DELETE' || method === 'POST') {
-		const token = req.headers.authorization.split(' ')[1]
-		if (!token) {
+		const reqToken = req.headers.authorization || null
+		if (!reqToken) {
 			return res.status(401).json({message: 'No Loged'})
 		}
 		try {
-			const decode = await jwt.verify(token, secretKey)
+			const token = reqToken.split(' ')[1]
+			const decode = jwt.verify(token, secretKey)
 			if (decode) {
 				req.username = decode.username
 				return next()
