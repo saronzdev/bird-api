@@ -11,7 +11,7 @@ const getDate = () => {
 	} else {
 		date.getHours() === 12 ? (hours = `12:${minutes} AM`) : (hours = `${date.getHours()}:${minutes} AM`)
 	}
-	const day = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+	const day = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`
 	return {time: hours, date: day}
 }
 
