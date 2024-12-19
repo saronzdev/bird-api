@@ -11,11 +11,7 @@ const PATH = '/api/v1/'
 const app = express()
 app.disable('x-powered-by')
 
-app.use(cors({
-  origin: 'https://bird-dusky.vercel.app',
-  credentials: true
-}))
-app.use(express.static(path.join(process.cwd(), 'public')), express.json(), express.urlencoded({extended: false}))
+app.use(express.static(path.join(process.cwd(), 'public')), cors(), express.json(), express.urlencoded({extended: false}))
 app.use(connectDB)
 app.post(PATH + 'register', register)
 app.post(PATH + 'login', login)
