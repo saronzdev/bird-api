@@ -5,28 +5,20 @@ import connectDB from './src/database/db.connect.js'
 import {login, register} from './src/controllers/auth.controller.js'
 import users from './src/routes/users.route.js'
 import posts from './src/routes/posts.route.js'
-import session from 'express'
+import expressSession from 'express'
 
 const PORT = process.env.PORT || 3000
 const PATH = '/api/v1/'
 const app = express()
 app.disable('x-powered-by')
 
-const sessionConfig = {
-  secret: 'MYSECRET',
-  name: 'bird-api',
-  cookie : {
-    sameSite: 'none', // THIS is the config you are looking for.
-  }
-};
-
-if (process.env.NODE_ENV === 'production') {
-  console.log('yea yea')
-  app.set('trust proxy', 1); // trust first proxy
-  sessionConfig.cookie.secure = true; // serve secure cookies
-}
-
-app.use(session(sessionConfig));
+app.use(expressSession({
+  // ... other options
+   cookie: {
+     secure: 'auto',
+     sameSite: 'none'
+   }
+ }))
 app.use(cors())
 app.use(express.static(path.join(process.cwd(), 'public')), express.json(), express.urlencoded({extended: false}))
 app.use(connectDB)
