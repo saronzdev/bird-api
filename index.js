@@ -12,7 +12,7 @@ const app = express()
 app.disable('x-powered-by')
 
 const corsOptions = {
-  origin: 'https://bird-dusky.vercel.app', // Cambia esto por el dominio de tu frontend
+  origin: '*', // Cambia esto por el dominio de tu frontend
   credentials: true, // Permite el envío de cookies
 }
 
