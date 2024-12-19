@@ -21,6 +21,7 @@ const sessionConfig = {
 };
 
 if (process.env.NODE_ENV === 'production') {
+  console.log('yea yea')
   app.set('trust proxy', 1); // trust first proxy
   sessionConfig.cookie.secure = true; // serve secure cookies
 }
