@@ -1,6 +1,21 @@
 import User from '../models/users.model.js'
 import getDate from '../modules/date.module.js'
 
+export async function getPosts(req, res) {
+  try {
+    const data = await User.find().select('posts')
+    if (data) {
+      return res.json(data)
+    }
+    else {
+      return res.status(404).json({msg: 'No posts'})
+    }
+  }
+  catch(e) {
+    return res.status(500).json({msg: e.toString()})
+  }  
+} 
+
 export const getPost = async (req, res) => {
   const {user} = req.params
 	const {token} = req
