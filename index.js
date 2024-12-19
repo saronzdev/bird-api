@@ -19,8 +19,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    secure: true,
-    sameSite: 'none'
+    secure: false,
+    sameSite: false
   }
 }))
 app.use(express.static(path.join(process.cwd(), 'public')), express.json(), express.urlencoded({extended: false}))
