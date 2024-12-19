@@ -5,6 +5,7 @@ import connectDB from './src/database/db.connect.js'
 import {login, register} from './src/controllers/auth.controller.js'
 import users from './src/routes/users.route.js'
 import posts from './src/routes/posts.route.js'
+import session from 'express'
 
 const PORT = process.env.PORT || 3000
 const PATH = '/api/v1/'
