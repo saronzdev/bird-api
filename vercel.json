@@ -1,12 +1,13 @@
 {
   "builds": [{
-    "build": {
-      "cmd": "npm run build",
-      "env": {
+    "src": "index.js", 
+    "use": "@vercel/node",
+    "cmd": "npm run build",
+    "env": {
         "NODE_ENV": "production"
       }
-    }
-}],
+  }
+],
   "routes": [
     {
       "src": "/",
