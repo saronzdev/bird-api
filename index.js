@@ -5,8 +5,6 @@ import connectDB from './src/database/db.connect.js'
 import {login, register} from './src/controllers/auth.controller.js'
 import users from './src/routes/users.route.js'
 import posts from './src/routes/posts.route.js'
-import {infor} from './src/modules/info.module.js'
-import {read} from './src/modules/read.module.js'
 
 const PORT = process.env.PORT || 3000
 const PATH = '/api/v1/'
@@ -22,7 +20,6 @@ app.use(PATH + 'posts', posts)
 app.get('/isAlive', (req, res) => {
 	res.send('Server Running Correctly')
 })
-app.get('/logs', read)
 app.use((req, res) => {
 	res.status(404).sendFile(path.join(process.cwd(), 'public', '404.html'))
 })
