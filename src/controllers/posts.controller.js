@@ -5,11 +5,7 @@ export async function getPosts(req, res) {
   try {
     const data = await User.find().select('posts')
     if (data) {
-      return res.cookie('__vercel_live_token', 'gg', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None'
-      }).json(data)
+      return res.json(data)
     }
     else {
       return res.status(404).json({msg: 'No posts'})
