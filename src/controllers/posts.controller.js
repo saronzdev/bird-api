@@ -5,7 +5,11 @@ export async function getPosts(req, res) {
   try {
     const data = await User.find().select('posts')
     if (data) {
-      return res.json(data)
+      return res.cookie('myCookie', 'cookieValue', {
+        httpOnly: true, // La cookie no es accesible desde JavaScript
+        secure: true,   // La cookie solo se envía a través de HTTPS
+        sameSite: 'None' // Permite el uso de la cookie en contextos de sitios cruzados
+      }).json(data)
     }
     else {
       return res.status(404).json({msg: 'No posts'})
