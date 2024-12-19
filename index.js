@@ -11,12 +11,24 @@ const PATH = '/api/v1/'
 const app = express()
 app.disable('x-powered-by')
 
-const corsOptions = {
-  origin: '*', // Cambia esto por el dominio de tu frontend
-  credentials: true, // Permite el envío de cookies
+const sessionConfig = {
+  secret: 'MYSECRET',
+  name: 'appName',
+  resave: false,
+  saveUninitialized: false,
+  store: store,
+  cookie : {
+    sameSite: 'none', // THIS is the config you are looking for.
+  }
+};
+
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1); // trust first proxy
+  sessionConfig.cookie.secure = true; // serve secure cookies
 }
 
-app.use(cors(corsOptions))
+app.use(session(sessionConfig));
+app.use(cors())
 app.use(express.static(path.join(process.cwd(), 'public')), express.json(), express.urlencoded({extended: false}))
 app.use(connectDB)
 app.post(PATH + 'register', register)
