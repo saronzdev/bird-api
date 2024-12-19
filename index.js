@@ -1,12 +1,12 @@
 import express from 'express'
 import cors from 'cors'
-import connectDB from './database/db.connect.js'
-import {login, register} from './controllers/auth.controller.js'
-import users from './routes/users.route.js'
-import posts from './routes/posts.route.js'
 import path from 'path'
-import {infor} from './modules/info.module.js'
-import {read} from './modules/read.module.js'
+import connectDB from './src/database/db.connect.js'
+import {login, register} from './src/controllers/auth.controller.js'
+import users from './src/routes/users.route.js'
+import posts from './src/routes/posts.route.js'
+import {infor} from './src/modules/info.module.js'
+import {read} from './src/modules/read.module.js'
 
 const PORT = process.env.PORT || 3000
 const PATH = '/api/v1/'
