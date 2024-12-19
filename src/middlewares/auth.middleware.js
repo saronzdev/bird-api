@@ -21,6 +21,7 @@ export const verifytoken = async (req, res, next) => {
 			} else return res.sendStatus(401)
 		} catch (e) {
 			if (e.name === 'TokenExpiredError') {
+				console.log('Vencido')
 				try {
 					const user = await User.findById(id).select('username')
 					if (user.username) {

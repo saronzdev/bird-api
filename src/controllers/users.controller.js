@@ -11,6 +11,19 @@ export const getAllUsers = async (req, res) => {
 	}
 }
 
+export const getUserById = async (req, res) => {
+  const {id} = req.params
+  try {
+    const data = await User.findOne({_id: id}).select('username')
+    if (data) {
+      return res.json(data)
+    }
+  }
+  catch (e) {
+    return res.status(500).json({message: e.toString()})
+  }
+}
+
 export const getUser = async (req, res) => {
 	const userParam = req.params.username
 	const userReq = req.username

@@ -17,7 +17,7 @@ export const register = async (req, res) => {
 			})
 			const data = await newUser.save()
 			if (data) return res.status(201).json({id: data._id, token: createToken(data.username)})
-			else return res.status(500).json({message: 'Unhandled Exception'})
+			else return res.status(401).json({message: 'Error on Auth'})
 		} catch (e) {
 			if (e.code === 11000) {
 				if (e.keyValue.username) return res.status(409).json({message: 'User Not Avaiable', code: 1})

@@ -1,8 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import morgan from 'morgan'
 import connectDB from './database/db.connect.js'
-import {verifytoken} from './middlewares/auth.middleware.js'
 import {login, register} from './controllers/auth.controller.js'
 import users from './routes/users.route.js'
 import posts from './routes/posts.route.js'
@@ -19,8 +17,8 @@ app.use(express.static(path.join(process.cwd(), 'public')), infor, cors(), expre
 app.use(connectDB)
 app.post(PATH + 'register', register)
 app.post(PATH + 'login', login)
-app.use(PATH + 'users', verifytoken, users)
-app.use(PATH + 'posts', verifytoken, posts)
+app.use(PATH + 'users', users)
+app.use(PATH + 'posts', posts)
 app.get('/isAlive', (req, res) => {
 	res.send('Server Running Correctly')
 })
