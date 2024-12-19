@@ -1,0 +1,16 @@
+{
+  "builds": {
+    "build": {
+      "cmd": "npm run build",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/"
+    }
+  ]
+}
