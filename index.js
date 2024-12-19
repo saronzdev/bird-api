@@ -13,10 +13,7 @@ app.disable('x-powered-by')
 
 const sessionConfig = {
   secret: 'MYSECRET',
-  name: 'appName',
-  resave: false,
-  saveUninitialized: false,
-  store: store,
+  name: 'bird-api',
   cookie : {
     sameSite: 'none', // THIS is the config you are looking for.
   }
